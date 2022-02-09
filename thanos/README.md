@@ -1,9 +1,13 @@
 <!--- app-name: Thanos -->
 
-# Thanos
+# Thanos packaged by Bitnami
 
-[Thanos](https://thanos.io/) is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
+Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
+[Overview of Thanos](https://thanos.io/)
+
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+                           
 ## TL;DR
 
 ```bash
@@ -49,28 +53,28 @@ helm uninstall my-release
 This charts allows you install several Thanos components, so you deploy an architecture as the one below:
 
 ```
-                       ┌──────────────┐                  ┌──────────────┐      ┌──────────────┐
-                       │ Thanos       │───────────┬────▶ │ Thanos Store │      │ Thanos       │
-                       │ Query        │           │      │ Gateway      │      │ Compactor    │
-                       └──────────────┘           │      └──────────────┘      └──────────────┘
-                   push                           │             │                     │
-┌──────────────┐   alerts   ┌──────────────┐      │             │ storages            │ Downsample &
-│ Alertmanager │ ◀──────────│ Thanos       │ ◀────┤             │ query metrics       │ compact blocks
-│ (*)          │            │ Ruler        │      │             │                     │
-└──────────────┘            └──────────────┘      │             ▼                     │
-      ▲                            │              │      ┌────────────────┐           │
-      │ push alerts                └──────────────│────▶ │ MinIO&reg; (*) │ ◀─────────┘
-      │                                           │      │                │
-┌ ── ── ── ── ── ── ── ── ── ──┐                  │      └────────────────┘
-│┌────────────┐  ┌────────────┐│                  │             ▲
-││ Prometheus │─▶│ Thanos     ││ ◀────────────────┘             │
-││ (*)        │◀─│ Sidecar (*)││    query                       │ inspect
-│└────────────┘  └────────────┘│    metrics                     │ blocks
-└ ── ── ── ── ── ── ── ── ── ──┘                                │
-                                                         ┌──────────────┐
-                                                         │ Thanos       │
-                                                         │ Bucket Web   │
-                                                         └──────────────┘
+                       ������������������������������������������������                  ������������������������������������������������      ������������������������������������������������
+                       ��� Thanos       ������������������������������������������������������ ��� Thanos Store ���      ��� Thanos       ���
+                       ��� Query        ���           ���      ��� Gateway      ���      ��� Compactor    ���
+                       ������������������������������������������������           ���      ������������������������������������������������      ������������������������������������������������
+                   push                           ���             ���                     ���
+������������������������������������������������   alerts   ������������������������������������������������      ���             ��� storages            ��� Downsample &
+��� Alertmanager ��� ������������������������������������ Thanos       ��� ������������������             ��� query metrics       ��� compact blocks
+��� (*)          ���            ��� Ruler        ���      ���             ���                     ���
+������������������������������������������������            ������������������������������������������������      ���             ���                     ���
+      ���                            ���              ���      ������������������������������������������������������           ���
+      ��� push alerts                ��������������������������������������������������������������� ��� MinIO&reg; (*) ��� ���������������������������������
+      ���                                           ���      ���                ���
+��� ������ ������ ������ ������ ������ ������ ������ ������ ������ ���������                  ���      ������������������������������������������������������
+���������������������������������������������  ���������������������������������������������                  ���             ���
+������ Prometheus ������������ Thanos     ������ ������������������������������������������������������             ���
+������ (*)        ������������ Sidecar (*)������    query                       ��� inspect
+���������������������������������������������  ���������������������������������������������    metrics                     ��� blocks
+��� ������ ������ ������ ������ ������ ������ ������ ������ ������ ���������                                ���
+                                                         ������������������������������������������������
+                                                         ��� Thanos       ���
+                                                         ��� Bucket Web   ���
+                                                         ������������������������������������������������
 ```
 
 > Note: Components marked with (*) are provided by subchart(s) (such as the [Bitnami MinIO&reg; chart](https://github.com/bitnami/charts/tree/master/bitnami/minio)) or external charts (such as the [Bitnami kube-prometheus chart](https://github.com/bitnami/charts/tree/master/bitnami/kube-prometheus)).
@@ -1261,7 +1265,7 @@ As an alternative, you can use of the preset configurations for pod affinity, po
 
 ## Troubleshooting
 
-Find more information about how to deal with common errors related to Bitnami’s Helm charts in [this troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues).
+Find more information about how to deal with common errors related to Bitnami's Helm charts in [this troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues).
 
 ## Upgrading
 
