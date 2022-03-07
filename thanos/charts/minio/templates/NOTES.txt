@@ -14,8 +14,8 @@ MinIO&reg; can be accessed via port {{ .Values.service.port }} on the following 
 
 To get your credentials run:
 
-   export ROOT_USER=$(kubectl get secret --namespace {{ .Release.Namespace }} {{ include "minio.secretName" . }} -o jsonpath="{.data.root-user}" | base64 --decode)
-   export ROOT_PASSWORD=$(kubectl get secret --namespace {{ .Release.Namespace }} {{ include "minio.secretName" . }} -o jsonpath="{.data.root-password}" | base64 --decode)
+   export ROOT_USER=$(kubectl get secret --namespace {{ .Release.Namespace }} {{ include "minio.secretName" . }} -o jsonpath="{.data.root-user}" | base64 -d)
+   export ROOT_PASSWORD=$(kubectl get secret --namespace {{ .Release.Namespace }} {{ include "minio.secretName" . }} -o jsonpath="{.data.root-password}" | base64 -d)
 
 To connect to your MinIO&reg; server using a client:
 
@@ -81,7 +81,8 @@ To access the MinIO&reg; web UI:
 
 {{- $requiredPasswords := list -}}
 {{- $secretName := include "minio.secretName" . -}}
-{{- if and (not .Values.auth.existingSecret) (not .Values.auth.forceNewKeys) (not .Values.gateway.enabled) -}}
+{{- $rootPassword := include "minio.secret.existingPassword" . -}}
+{{- if not $rootPassword }}
   {{- $requiredRootUser := dict "valueKey" "auth.rootUser" "secret" $secretName "field" "root-user" -}}
   {{- $requiredRootPassword := dict "valueKey" "auth.rootPassword" "secret" $secretName "field" "root-password" -}}
   {{- $requiredPasswords = append $requiredPasswords $requiredRootUser -}}
