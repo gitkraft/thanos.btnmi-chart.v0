@@ -8,6 +8,8 @@ Thanos is a highly available metrics system that can be added on top of existing
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
+Looking to use Thanos in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## TL;DR
 
 ```console
@@ -763,6 +765,7 @@ Check the section [Integrate Thanos with Prometheus and Alertmanager](#integrate
 | `ruler.logFormat`                                         | Thanos Ruler log format                                                                                                          | `logfmt`                 |
 | `ruler.replicaLabel`                                      | Label to treat as a replica indicator along which data is de-duplicated                                                          | `replica`                |
 | `ruler.dnsDiscovery.enabled`                              | Dynamically configure Query APIs using DNS discovery                                                                             | `true`                   |
+| `ruler.queryURL`                                          | Thanos query/query-frontend URL to link in Ruler UI.                                                                             | `""`                     |
 | `ruler.alertmanagers`                                     | Alert managers URLs array                                                                                                        | `[]`                     |
 | `ruler.alertmanagersConfig`                               | Alert managers configuration                                                                                                     | `""`                     |
 | `ruler.evalInterval`                                      | The default evaluation interval to use                                                                                           | `1m`                     |
